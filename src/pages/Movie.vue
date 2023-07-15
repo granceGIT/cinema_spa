@@ -5,22 +5,12 @@
                 <div class="movie-body">
 
                     <div class="movie-images">
-                        <div class="image-block big">
-                            <img src="@/assets/images/7.jpg" alt="1" class="img-cover">
+                        <div class="image-block main">
+                            <img :src="mainImage" :alt="film.name+' poster'" class="img-cover">
                         </div>
                         <div class="movie-images-body">
-                            <div class="image-block">
-                                <img src="@/assets/images/8.jpg" alt="3" class="img-cover">
-                            </div>
-                            <div class="image-block">
-                                <img src="@/assets/images/9.jpg" alt="2" class="img-cover">
-                            </div>
-                            <div class="image-block">
-                                <img src="@/assets/images/10.jpg" alt="4" class="img-cover">
-                            </div>
-                            <div class="image-block">
-                                <img src="@/assets/images/11.jpg" alt="5" class="img-cover">
-                            </div>
+                            <ScrollSlider v-bind:slides="film.images" v-bind:slide-class="'image-block'"
+                                          @selected="changeImage"/>
                         </div>
 
 
@@ -28,38 +18,29 @@
 
                     <div class="movie-info">
                         <div class="film-info">
-                            <h2 class="film-title">Бессонница</h2>
+                            <h2 class="film-title">{{ film.name }}</h2>
                             <div class="film-details">
-                                <span class="film-rating">7.8</span>
-                                <span class="film-created">2021, США</span>
-                                <span class="film-geres">Драма, триллер</span>
-                                <span class="film-duration">98 мин</span>
-                                <span class="film-restrictions">16+</span>
+                                <span class="film-rating" v-if="film.rating">{{ film.rating }}</span>
+                                <span class="film-created">{{ film.release_date }}, {{ film.country }}</span>
+                                <span class="film-geres">{{ film.genres.map(genre => genre.name).join(', ') }}</span>
+                                <span class="film-duration">{{ film.duration }} мин</span>
+                                <span class="film-restrictions">{{ film.age_restriction }}+</span>
                             </div>
 
                             <p class="film-director">
-                                <span class="text-muted">Режиссёр:</span> Кристофер Нолан
+                                <span class="text-muted">Режиссёр:</span> {{ film.director }}
                             </p>
 
                             <p class="film-description">
-                                <span class="text-muted">Описание:</span> Драма, в которой стерты все границы реальности и вымысла. Потеряв сон, герой Метью Кросса
-                                потерял себя и уже не понимает, что происходит по-настоящему, а что является плодом его
-                                воображения.
+                                <span class="text-muted">Описание:</span> {{ film.description }}
                             </p>
 
                             <div class="film-actors">
                                 <span class="text-muted">Список актеров:</span>
                                 <ul class="actors-list">
-                                    <li class="actor-item">Актер 1</li>
-                                    <li class="actor-item">Актер 1</li>
-                                    <li class="actor-item">Актер 1</li>
-                                    <li class="actor-item">Актер 1</li>
-                                    <li class="actor-item">Актер 1</li>
-                                    <li class="actor-item">Актер 1</li>
-                                    <li class="actor-item">Актер 1</li>
-                                    <li class="actor-item">Актер 1</li>
-                                    <li class="actor-item">Актер 1</li>
-                                    <li class="actor-item">Актер 1</li>
+                                    <li class="actor-item" v-for="actor in film.actors" v-bind:key="actor.id">
+                                        {{ actor.role }} - {{ actor.name }} {{ actor.surname }}
+                                    </li>
                                 </ul>
                             </div>
 
@@ -67,8 +48,6 @@
                             <div class="film-manage">
                                 <router-link to="/showings" class="btn btn-primary">Купить билет</router-link>
                             </div>
-
-
 
 
                         </div>
@@ -305,11 +284,13 @@
 
                     <div class="summary">
                         <div class="selected-seats">Выбрано билетов: <span class="selected-seats-count">2</span></div>
-                        <div class="selected-tickets">Общая стоимость билетов: <span class="base-ticket-price price">500</span></div>
+                        <div class="selected-tickets">Общая стоимость билетов: <span
+                                class="base-ticket-price price">500</span></div>
                         <div class="ticket-types">
                             <div class="form-group">
                                 <label for="child_tickets_count">Количество детских билетов:</label>
-                                <input type="number" id="child_tickets_count" name="child_tickets_count" required max="2" min="0" placeholder="0">
+                                <input type="number" id="child_tickets_count" name="child_tickets_count" required
+                                       max="2" min="0" placeholder="0">
                             </div>
                         </div>
                         <div class="total-tickets">Итого: <span class="total-price price">500</span></div>
@@ -323,14 +304,30 @@
     </main>
 </template>
 
-<script>
-export default {
-    setup() {
+<script async setup>
+import {ref} from 'vue'
+import {useRoute} from 'vue-router'
+import request from "@/http";
+import store from "@/store";
+import ScrollSlider from "@/components/ScrollSlider.vue";
 
+const film = ref({})
+const mainImage = ref('')
+const route = useRoute()
 
-        return {}
-    }
+const changeImage = (value) => {
+    mainImage.value = value
 }
+
+await request().get(`/films/${route.params.id}`)
+    .then(data => {
+        film.value = data
+        mainImage.value = data.images.length ? data.images[0].image : ''
+    })
+    .catch(e => {
+        store.mutations.showAlert(e.message)
+    })
+
 </script>
 
 <style scoped>

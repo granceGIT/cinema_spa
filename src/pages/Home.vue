@@ -17,7 +17,7 @@
                         ведь Генри оказывается совсем не тем человеком, которого она знает…
                     </p>
                     <div class="film-manage">
-                        <router-link to="/showings/1" class="btn btn-primary">Купить билет</router-link>
+                        <router-link to="/films/1" class="btn btn-primary">Купить билет</router-link>
                     </div>
                 </div>
             </div>
@@ -30,105 +30,32 @@
                 Популярные за неделю
             </h2>
             <div class="popular-body">
-                <router-link to="/showings/1" class="popular-card">
-                    <div class="popular-card-img">
-                        <img src="@/assets/images/2.jpg" alt="Под водой постер" class="img-cover">
-                    </div>
-                    <h3 class="popular-card-title">
-                        Под водой
-                    </h3>
-                    <div class="popular-card-genres">
-                        Приключения, семейный
-                    </div>
-                </router-link>
 
-                <router-link to="/showings/1" class="popular-card">
-                    <div class="popular-card-img">
-                        <img src="@/assets/images/3.jpg" alt="Мгла постер" class="img-cover">
-                    </div>
-                    <h3 class="popular-card-title">
-                        Мгла
-                    </h3>
-                    <div class="popular-card-genres">
-                        Ужасы, триллер
-                    </div>
-                </router-link>
-
-                <router-link to="/showings/1" class="popular-card">
-                    <div class="popular-card-img">
-                        <img src="@/assets/images/4.jpg" alt="Охота постер" class="img-cover">
-                    </div>
-                    <h3 class="popular-card-title">
-                        Охота
-                    </h3>
-                    <div class="popular-card-genres">
-                        Детектив, криминал, драма
-                    </div>
-                </router-link>
-
-                <router-link to="/showings/1" class="popular-card">
-                    <div class="popular-card-img">
-                        <img src="@/assets/images/5.jpg" alt="Синхронизация постер" class="img-cover">
-                    </div>
-                    <h3 class="popular-card-title">
-                        Синхронизация
-                    </h3>
-                    <div class="popular-card-genres">
-                        Триллер, драма
-                    </div>
-                </router-link>
+                <Suspense>
+                    <template #default>
+                        <PopularList/>
+                    </template>
+                    <template #fallback>
+                        <LoadingSpinner/>
+                    </template>
+                </Suspense>
             </div>
         </div>
     </section>
 
-    <section class="most-viewed section">
+    <section class="latest section">
         <div class="container">
             <h2 class="section-title">
-                Самый популярный за сегодня
+                Новинка
             </h2>
-            <div class="most-viewed-body">
-                <div class="most-viewed-info">
-                    <div class="film-info">
-                        <h2 class="film-title">Бессонница</h2>
-                        <div class="film-details">
-                            <span class="film-rating">7.8</span>
-                            <span class="film-created">2021, США</span>
-                            <span class="film-genres">Драма, триллер</span>
-                            <span class="film-duration">98 мин</span>
-                            <span class="film-restrictions">16+</span>
-                        </div>
-                        <p class="film-description">
-                            Драма, в которой стерты все границы реальности и вымысла. Потеряв сон, герой Метью Кросса
-                            потерял себя и уже не понимает, что происходит по-настоящему, а что является плодом его
-                            воображения.
-                        </p>
-                        <span class="film-price price">от 199</span>
-                        <div class="film-manage">
-                            <router-link to="/showings" class="btn btn-primary">Купить билет</router-link>
-                        </div>
-                    </div>
-
-                    <!-- ... -->
-                </div>
-                <div class="most-viewed-images">
-                    <div class="image-block big">
-                        <img src="@/assets/images/7.jpg" alt="1" class="img-cover">
-                    </div>
-                    <div class="image-block">
-                        <img src="@/assets/images/8.jpg" alt="3" class="img-cover">
-                    </div>
-                    <div class="image-block">
-                        <img src="@/assets/images/9.jpg" alt="2" class="img-cover">
-                    </div>
-                    <div class="image-block">
-                        <img src="@/assets/images/10.jpg" alt="4" class="img-cover">
-                    </div>
-                    <div class="image-block">
-                        <img src="@/assets/images/11.jpg" alt="5" class="img-cover">
-                    </div>
-
-                </div>
-            </div>
+            <Suspense>
+                <template #default>
+                    <Latest/>
+                </template>
+                <template #fallback>
+                    <LoadingSpinner/>
+                </template>
+            </Suspense>
         </div>
     </section>
 
@@ -136,38 +63,34 @@
         <div class="container">
             <h2 class="section-title">Залы</h2>
             <div class="halls-body">
-                <div class="hall-card">
-                    <img src="@/assets/images/7da411627191c247d03cea77d3887be4_original.webp" alt="hall 1" class="img-cover">
-                    <h3 class="hall-card-title">Зал №1</h3>
-                </div>
-
-                <div class="hall-card">
-                    <img src="@/assets/images/57d7b1c340c08829298cf4b9_6393231f1a4112.60475760.jpg" alt="hall 2" class="img-cover">
-                    <h3 class="hall-card-title">Зал №2</h3>
-                </div>
-
-                <div class="hall-card">
-                    <img src="@/assets/images/DSC_1021_1_1.png" alt="hall 3" class="img-cover">
-                    <h3 class="hall-card-title">Зал №3</h3>
-                </div>
-
-                <div class="hall-card">
-                    <img src="@/assets/images/7da411627191c247d03cea77d3887be4_original.webp" alt="hall 4" class="img-cover">
-                    <h3 class="hall-card-title">Зал №4</h3>
+                <div v-for="hall in halls" :key="hall.id" class="hall-card">
+                    <img :src="hall.images[0].image" :alt="'изображение ' + hall.name" class="img-cover">
+                    <h3 class="hall-card-title">{{ hall.name }}</h3>
                 </div>
             </div>
         </div>
     </section>
 </template>
 
-<script>
-export default {
-    setup() {
+<script setup>
+import {onMounted, ref} from "vue";
+import request from "@/http";
+import store from "@/store";
+import LoadingSpinner from "@/components/LoadingSpinner.vue";
+import PopularList from "@/components/films/PopularList.vue";
+import Latest from "@/components/films/Latest.vue";
 
+const halls = ref([])
 
-        return {}
-    }
-}
+onMounted(() => {
+    request().get('/halls')
+        .then(data => {
+            halls.value = data
+        })
+        .catch(error => {
+            store.mutations.showAlert(error)
+        })
+})
 </script>
 
 <style scoped>

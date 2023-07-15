@@ -7,11 +7,11 @@
                         <h2 class="section-title">Данные профиля</h2>
                         <div class="profile-data-card">
                             <div class="text-muted">Имя:</div>
-                            <div>Иван</div>
+                            <div>{{ user.name }}</div>
                         </div>
                         <div class="profile-data-card">
                             <div class="text-muted">Телефон:</div>
-                            <div>+7 900 000 00 00</div>
+                            <div>**{{ user.phone_number.slice(-4) }}</div>
                         </div>
                         <div class="profile-data-card">
                             <div class="text-muted">Заказов:</div>
@@ -76,7 +76,7 @@
                                         </div>
                                     </div>
                                     <div class="order-ticket-card">
-                                        <div class="tiket-code">
+                                        <div class="ticket-code">
                                             <span class="text-muted">Билет: </span>13
                                         </div>
                                         <div class="ticket-seat">
@@ -88,7 +88,7 @@
                                         </div>
                                     </div>
                                     <div class="order-ticket-card">
-                                        <div class="tiket-code">
+                                        <div class="ticket-code">
                                             <span class="text-muted">Билет: </span>14
                                         </div>
                                         <div class="ticket-seat">
@@ -100,7 +100,7 @@
                                         </div>
                                     </div>
                                     <div class="order-ticket-card">
-                                        <div class="tiket-code">
+                                        <div class="ticket-code">
                                             <span class="text-muted">Билет: </span>15
                                         </div>
                                         <div class="ticket-seat">
@@ -120,7 +120,7 @@
                                                                               class="img-cover"></div>
                                         <div class="order-card-film-info">
                                             <h2 class="order-card-film-title">Бессонница</h2>
-                                            <div class="order-card-film-geres text-muted">Драма, триллер</div>
+                                            <div class="order-card-film-genres text-muted">Драма, триллер</div>
                                             <div class="order-card-film-restrictions text-muted">16+</div>
                                         </div>
                                     </div>
@@ -148,7 +148,7 @@
                                 </div>
                                 <div class="order-tickets">
                                     <div class="order-ticket-card">
-                                        <div class="tiket-code">
+                                        <div class="ticket-code">
                                             <span class="text-muted">Билет: </span>12
                                         </div>
                                         <div class="ticket-seat">
@@ -160,7 +160,7 @@
                                         </div>
                                     </div>
                                     <div class="order-ticket-card">
-                                        <div class="tiket-code">
+                                        <div class="ticket-code">
                                             <span class="text-muted">Билет: </span>13
                                         </div>
                                         <div class="ticket-seat">
@@ -172,7 +172,7 @@
                                         </div>
                                     </div>
                                     <div class="order-ticket-card">
-                                        <div class="tiket-code">
+                                        <div class="ticket-code">
                                             <span class="text-muted">Билет: </span>14
                                         </div>
                                         <div class="ticket-seat">
@@ -184,7 +184,7 @@
                                         </div>
                                     </div>
                                     <div class="order-ticket-card">
-                                        <div class="tiket-code">
+                                        <div class="ticket-code">
                                             <span class="text-muted">Билет: </span>15
                                         </div>
                                         <div class="ticket-seat">
@@ -207,7 +207,7 @@
                                                                               class="img-cover"></div>
                                         <div class="order-card-film-info">
                                             <h2 class="order-card-film-title">Бессонница</h2>
-                                            <div class="order-card-film-geres text-muted">Драма, триллер</div>
+                                            <div class="order-card-film-genres text-muted">Драма, триллер</div>
                                             <div class="order-card-film-restrictions text-muted">16+</div>
                                         </div>
                                     </div>
@@ -240,7 +240,7 @@
                                                                               class="img-cover"></div>
                                         <div class="order-card-film-info">
                                             <h2 class="order-card-film-title">Бессонница</h2>
-                                            <div class="order-card-film-geres text-muted">Драма, триллер</div>
+                                            <div class="order-card-film-genres text-muted">Драма, триллер</div>
                                             <div class="order-card-film-restrictions text-muted">16+</div>
                                         </div>
                                     </div>
@@ -273,14 +273,10 @@
     </main>
 </template>
 
-<script>
-export default {
-    setup() {
+<script setup>
+import store from "@/store";
 
-
-        return {}
-    }
-}
+const user = store.state.user
 </script>
 
 <style scoped>

@@ -64,6 +64,30 @@ body {
     display: flex;
 }
 
+/* #region scroll */
+
+::-webkit-scrollbar {
+    width: 13px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--clr-grey);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #666767;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--clr-primary);
+}
+
+/* #endregion */
+
+/* #region btn */
+
 .btn {
     padding: 1em 2em;
     display: block;
@@ -107,6 +131,8 @@ body {
     transform: translateY(-2px);
 }
 
+/* #endregion */
+
 .img-cover {
     width: 100%;
     height: 100%;
@@ -115,6 +141,10 @@ body {
 
 .price {
     font-weight: bold;
+}
+
+.visually-hidden{
+    visibility: hidden;
 }
 
 .price::after {
@@ -126,6 +156,16 @@ body {
     flex-direction: column;
     margin: 15px 0;
     gap: 10px;
+}
+
+.form-group.is-invalid input{
+    border-color: #a62c2c;
+}
+
+.form-group .invalid-text{
+    color: #a62c2c;
+    font-size: .9em;
+    text-align: center;
 }
 
 .form-group input {
@@ -283,7 +323,7 @@ body {
 
 .popular-body {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, 350px);
     gap: 15px;
 }
 
@@ -299,6 +339,7 @@ body {
 .popular-card-img {
     border-radius: 5px;
     overflow: hidden;
+    min-height: 300px;
 }
 
 .popular-card-title {
@@ -311,22 +352,22 @@ body {
 
 /* #endregion */
 
-/* #region most-viewed */
+/* #region latest */
 
-.most-viewed-body {
+.latest-body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
     gap: 30px;
 }
 
-.most-viewed-info {
+.latest-info {
     display: grid;
     grid-template-rows: 250px;
     grid-auto-rows: 250px;
     gap: 25px;
 }
 
-.most-viewed .film-info {
+.latest .film-info {
     grid-row: span 2;
     padding: 30px 20px;
     display: flex;
@@ -340,15 +381,15 @@ body {
     margin: 30px 0;
 }
 
-.most-viewed-body .film-manage .btn {
+.latest-body .film-manage .btn {
     min-width: 300px;
 }
 
-.most-viewed-body .film-description {
+.latest-body .film-description {
     max-width: 60ch;
 }
 
-.most-viewed-images {
+.latest-images {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 25px;
@@ -363,11 +404,15 @@ body {
     cursor: pointer;
 }
 
-.image-block:hover {
+.image-block:not(:nth-child(1))>img {
+    transition: all .4s;
+}
+
+.image-block:not(:nth-child(1)):hover>img {
     transform: scale(1.02);
 }
 
-.image-block.big {
+.image-block:nth-child(1) {
     grid-column: span 2;
     grid-row: span 2;
 }
@@ -398,6 +443,7 @@ body {
     background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0));
     width: 100%;
     font-size: 2em;
+    z-index: 1;
 }
 
 .hall-card img {
@@ -448,7 +494,7 @@ body {
 
 .showings-body {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(4,1fr);
     gap: 60px 15px;
 }
 
@@ -461,7 +507,14 @@ body {
     cursor: pointer;
 }
 
+.showings-not-found{
+    color: var(--clr-muted);
+    text-align: center;
+    grid-column: 1/-1;
+}
+
 .showing-card-img {
+    height: 300px;
     border-radius: 5px;
     overflow: hidden;
 }
@@ -530,6 +583,7 @@ body {
 }
 
 .filter-check-card {
+    user-select: none;
     display: block;
     font-size: .9em;
     padding: 1em 1.5em;
@@ -582,12 +636,7 @@ body {
 }
 
 .movie-body .movie-images-body {
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: 300px;
-    gap: 15px;
-    overflow-x: scroll;
-    overflow-y: hidden;
+    grid-column: span 2;
     padding: 15px 0;
 }
 
@@ -609,7 +658,11 @@ body {
     cursor: pointer;
 }
 
-.movie-images .image-block:hover {
+.movie-images .image-block:not(.main)>img {
+    transition: all .4s;
+}
+
+.movie-images .image-block:not(.main):hover>img {
     transform: scale(1.02);
 }
 
