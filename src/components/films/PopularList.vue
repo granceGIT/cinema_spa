@@ -9,15 +9,15 @@ import request from "@/http";
 import store from "@/store";
 import PopularCard from "@/components/films/PopularCard.vue";
 
-const films = ref([])
+const films = ref([]);
 
-await request().get('/films/popular')
-    .then(data=>{
-        films.value = data
-    })
-    .catch(e=>{
-        store.mutations.showAlert(e.message)
-    })
+await request().get("/films/popular")
+	.then(data => {
+		films.value = data;
+	})
+	.catch(e => {
+		store.mutations.showAlert(e.message);
+	});
 </script>
 
 <style lang="scss" scoped>

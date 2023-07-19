@@ -8,15 +8,15 @@
             {{ props.film.name }}
         </h3>
         <div class="popular-card-genres">
-            {{ props.film.genres.map(item => item.name).join(', ') }}
+            {{ props.film.genres.map(item => item.name).join(", ") }}
         </div>
     </router-link>
 </template>
 
 <script setup>
-import {defineProps} from 'vue';
+import {defineProps} from "vue";
 
-const props = defineProps({film: Object})
+const props = defineProps({film: Object});
 </script>
 
 <style lang="scss" scoped>

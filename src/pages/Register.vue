@@ -12,7 +12,8 @@
                     </div>
                     <div class="form-group">
                         <label for="phone">Телефон:</label>
-                        <input type="tel" name="phone" id="phone" class="form-input" required placeholder="+7 900 000 00 00">
+                        <input type="tel" name="phone" id="phone" class="form-input" required
+                               placeholder="+7 900 000 00 00">
                     </div>
                     <div class="form-group">
                         <label for="password">Пароль:</label>
@@ -28,7 +29,9 @@
                         <button class="btn btn-primary">Зарегистрироваться</button>
                     </div>
                     <div class="form-group">
-                        <p>Уже есть аккаунт? <router-link class="link-primary" to="/login">Войти</router-link></p>
+                        <p>Уже есть аккаунт?
+                            <router-link class="link-primary" to="/login">Войти</router-link>
+                        </p>
                     </div>
                 </form>
             </div>
@@ -38,12 +41,12 @@
 
 <script>
 export default {
-    setup() {
+	setup() {
 
 
-        return {}
-    }
-}
+		return {};
+	},
+};
 </script>
 
 <style scoped>

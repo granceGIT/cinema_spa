@@ -9,8 +9,8 @@
 import store from "@/store";
 
 const hide = () => {
-    store.mutations.hideAlert()
-}
+	store.mutations.hideAlert();
+};
 </script>
 
 <style>

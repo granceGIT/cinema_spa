@@ -19,56 +19,56 @@
 </template>
 
 <script setup>
-import {defineProps, defineEmits, onMounted, ref} from 'vue';
+import {defineProps, defineEmits, onMounted, ref} from "vue";
 
-const emit = defineEmits(['selected'])
+const emit = defineEmits(["selected"]);
 
 const props = defineProps({
-    slides: Array,
-    slideClass: String,
-})
+	slides: Array,
+	slideClass: String,
+});
 
-const slides = ref([])
-const slider = ref(null)
+const slides = ref([]);
+const slider = ref(null);
 let slideWidth;
 
 
 onMounted(() => {
-    slideWidth = slides.value[0].clientWidth + 5
-})
+	slideWidth = slides.value[0].clientWidth + 5;
+});
 
 let isDragging = false, currentX, currentScroll;
 
 const dragStart = e => {
-    isDragging = true;
-    currentX = e.pageX;
-    currentScroll = slider.value.scrollLeft;
-}
+	isDragging = true;
+	currentX = e.pageX;
+	currentScroll = slider.value.scrollLeft;
+};
 
 const dragging = e => {
-    if (!isDragging) return;
-    e.preventDefault();
-    slider.value.classList.add('dragging');
-    let positionDiff = e.pageX - currentX;
-    slider.value.scrollLeft = currentScroll - positionDiff;
-}
+	if (!isDragging) return;
+	e.preventDefault();
+	slider.value.classList.add("dragging");
+	let positionDiff = e.pageX - currentX;
+	slider.value.scrollLeft = currentScroll - positionDiff;
+};
 
 const dragStop = () => {
-    isDragging = false;
-    slider.value.classList.remove('dragging');
-}
+	isDragging = false;
+	slider.value.classList.remove("dragging");
+};
 
 const prevSlide = () => {
-    slider.value.scrollLeft -= slideWidth
-}
+	slider.value.scrollLeft -= slideWidth;
+};
 
 const nextSlide = () => {
-    slider.value.scrollLeft += slideWidth
-}
+	slider.value.scrollLeft += slideWidth;
+};
 
 const imageSelected = (e) => {
-    emit('selected', e.target.querySelector('img').src)
-}
+	emit("selected", e.target.querySelector("img").src);
+};
 
 </script>
 

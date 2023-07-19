@@ -4,11 +4,11 @@
 
 <script setup>
 import Card from "@/components/films/Card.vue";
-import {defineProps} from 'vue';
+import {defineProps} from "vue";
 
 const props = defineProps({
-    films: Array,
-})
+	films: Array,
+});
 
 </script>
 

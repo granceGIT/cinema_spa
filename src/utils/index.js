@@ -1,12 +1,18 @@
-const dateToSQL = (date)=>{
-    return date.toISOString().slice(0,10)
-}
+const dateToSQLDate = (date) => {
+	return date.toISOString().slice(0, 10);
+};
 
-const addDaysToDate = (date,days)=>{
-    return new Date(date.setDate(date.getDate()+days))
-}
+const SQLDateToDate = (SQLDate) => {
+	const [year, month, day] = SQLDate.split("-");
+	return `${day}.${month}.${year}`;
+};
+
+const addDaysToDate = (date, days) => {
+	return new Date(date.setDate(date.getDate() + days));
+};
 
 export {
-    dateToSQL,
-    addDaysToDate,
-}
+	dateToSQLDate,
+	addDaysToDate,
+	SQLDateToDate,
+};

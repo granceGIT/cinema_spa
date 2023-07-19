@@ -314,6 +314,11 @@ body {
     margin: 30px 0;
 }
 
+.film-info .showings-not-found{
+    text-align: center;
+    font-size: 1.2em;
+}
+
 
 
 
@@ -931,6 +936,14 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+}
+
+.order-card-rate .edit-rate{
+    font-size: .9em;
+    text-decoration: underline;
+    margin-top: .5em;
+    cursor: pointer;
 }
 
 .order-card-rate .text-rating{
@@ -967,6 +980,11 @@ body {
 
 .order-card-film-title{
     font-size: 1.7em;
+}
+
+.film-title-link{
+    text-decoration: none;
+    color: var(--clr-text);
 }
 
 .order-card-film-info{

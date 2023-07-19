@@ -6,7 +6,7 @@
                 <div class="film-details">
                     <span class="film-rating" v-if="film.rating">{{ film.rating }}</span>
                     <span class="film-created">{{ film.release_date }}, {{ film.country }}</span>
-                    <span class="film-genres">{{ film.genres.map(item => item.name).join(', ') }}</span>
+                    <span class="film-genres">{{ film.genres.map(item => item.name).join(", ") }}</span>
                     <span class="film-duration">{{ film.duration }} мин</span>
                     <span class="film-restrictions">{{ film.age_restriction }}+</span>
                 </div>
@@ -32,19 +32,19 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
+import {ref} from "vue";
 import store from "@/store";
 import request from "@/http";
 
-const film = ref({})
+const film = ref({});
 
-await request().get('/films/latest')
-    .then(data => {
-        film.value = data
-    })
-    .catch(e => {
-        store.mutations.showAlert(e.message)
-    })
+await request().get("/films/latest")
+	.then(data => {
+		film.value = data;
+	})
+	.catch(e => {
+		store.mutations.showAlert(e.message);
+	});
 </script>
 
 <style lang="scss" scoped>

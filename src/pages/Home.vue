@@ -80,17 +80,17 @@ import LoadingSpinner from "@/components/LoadingSpinner.vue";
 import PopularList from "@/components/films/PopularList.vue";
 import Latest from "@/components/films/Latest.vue";
 
-const halls = ref([])
+const halls = ref([]);
 
 onMounted(() => {
-    request().get('/halls')
-        .then(data => {
-            halls.value = data
-        })
-        .catch(error => {
-            store.mutations.showAlert(error)
-        })
-})
+	request().get("/halls")
+		.then(data => {
+			halls.value = data;
+		})
+		.catch(error => {
+			store.mutations.showAlert(error);
+		});
+});
 </script>
 
 <style scoped>

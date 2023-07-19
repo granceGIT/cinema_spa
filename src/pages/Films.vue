@@ -41,19 +41,19 @@ import {ref} from "vue";
 import request from "@/http";
 import store from "@/store";
 
-const films = ref([])
+const films = ref([]);
 
-await request().get('/films')
-    .then(data => {
-        films.value = data
-    })
-    .catch(e => {
-        store.mutations.showAlert(e.message)
-    })
+await request().get("/films")
+	.then(data => {
+		films.value = data;
+	})
+	.catch(e => {
+		store.mutations.showAlert(e.message);
+	});
 
 const updateFilms = (value) => {
-    films.value = value
-}
+	films.value = value;
+};
 
 
 </script>

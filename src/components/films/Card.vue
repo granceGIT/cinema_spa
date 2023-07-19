@@ -10,17 +10,17 @@
             {{ props.film.rating }}&nbsp;
         </div>
         <div class="showing-card-genres">
-            {{ props.film.genres.map(item => item.name).join(', ') }}
+            {{ props.film.genres.map(item => item.name).join(", ") }}
         </div>
     </router-link>
 </template>
 
 <script setup>
-import {defineProps} from 'vue';
+import {defineProps} from "vue";
 
 const props = defineProps({
-    film:Object,
-})
+	film: Object,
+});
 </script>
 
 <style scoped>

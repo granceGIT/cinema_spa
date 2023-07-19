@@ -15,11 +15,11 @@
                         </div>
                         <div class="profile-data-card">
                             <div class="text-muted">Заказов:</div>
-                            <div>2</div>
+                            <div>{{ user.orders_count }}</div>
                         </div>
                         <div class="profile-data-card">
                             <div class="text-muted">Оценок:</div>
-                            <div>1</div>
+                            <div>{{ user.rates_count }}</div>
                         </div>
                         <div class="profile-data-card profile-manage">
                             <button class="btn btn-primary">Изменить данные</button>
@@ -29,242 +29,11 @@
                     <div class="orders-body">
                         <h2 class="section-title">Активные заказы</h2>
                         <div class="active-orders">
-                            <div class="order-contents">
-                                <div class="order-card">
-                                    <div class="order-card-film">
-                                        <div class="order-card-film-img"><img src="@/assets/images/4.jpg" alt="film name"
-                                                                              class="img-cover"></div>
-                                        <div class="order-card-film-info">
-                                            <h2 class="order-card-film-title">Бессонница</h2>
-                                            <div class="order-card-film-geres text-muted">Драма, триллер</div>
-                                            <div class="order-card-film-restrictions text-muted">16+</div>
-                                        </div>
-                                    </div>
-                                    <div class="order-card-ticket">
-                                        <div><span class="text-muted">Билетов: </span>
-                                            4
-                                        </div>
-                                        <div><span class="text-muted">Детских: </span>
-                                            2
-                                        </div>
-                                    </div>
-                                    <div class="order-card-hall">
-                                        <div><span class="text-muted">Зал: </span>
-                                            Зал №1
-                                        </div>
-                                    </div>
-                                    <div class="order-card-date">
-                                        <div><span class="text-muted">Дата: </span>
-                                            10.06.2023
-                                        </div>
-                                        <div><span class="text-muted">Начало в: </span>
-                                            21:30
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="order-tickets">
-                                    <div class="order-ticket-card">
-                                        <div class="tiket-code">
-                                            <span class="text-muted">Билет: </span>12
-                                        </div>
-                                        <div class="ticket-seat">
-                                            <div><span class="text-muted">Ряд: </span>1</div>
-                                            <div><span class="text-muted">Место: </span>4</div>
-                                        </div>
-                                        <div class="ticket-seat-type">
-                                            <span class="text-muted">Тип: </span>Эконом
-                                        </div>
-                                    </div>
-                                    <div class="order-ticket-card">
-                                        <div class="ticket-code">
-                                            <span class="text-muted">Билет: </span>13
-                                        </div>
-                                        <div class="ticket-seat">
-                                            <div><span class="text-muted">Ряд: </span>1</div>
-                                            <div><span class="text-muted">Место: </span>5</div>
-                                        </div>
-                                        <div class="ticket-seat-type">
-                                            <span class="text-muted">Тип: </span>Эконом
-                                        </div>
-                                    </div>
-                                    <div class="order-ticket-card">
-                                        <div class="ticket-code">
-                                            <span class="text-muted">Билет: </span>14
-                                        </div>
-                                        <div class="ticket-seat">
-                                            <div><span class="text-muted">Ряд: </span>1</div>
-                                            <div><span class="text-muted">Место: </span>6</div>
-                                        </div>
-                                        <div class="ticket-seat-type">
-                                            <span class="text-muted">Тип: </span>Эконом
-                                        </div>
-                                    </div>
-                                    <div class="order-ticket-card">
-                                        <div class="ticket-code">
-                                            <span class="text-muted">Билет: </span>15
-                                        </div>
-                                        <div class="ticket-seat">
-                                            <div><span class="text-muted">Ряд: </span>1</div>
-                                            <div><span class="text-muted">Место: </span>7</div>
-                                        </div>
-                                        <div class="ticket-seat-type">
-                                            <span class="text-muted">Тип: </span>Эконом
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="order-contents">
-                                <div class="order-card">
-                                    <div class="order-card-film">
-                                        <div class="order-card-film-img"><img src="@/assets/images/4.jpg" alt="film name"
-                                                                              class="img-cover"></div>
-                                        <div class="order-card-film-info">
-                                            <h2 class="order-card-film-title">Бессонница</h2>
-                                            <div class="order-card-film-genres text-muted">Драма, триллер</div>
-                                            <div class="order-card-film-restrictions text-muted">16+</div>
-                                        </div>
-                                    </div>
-                                    <div class="order-card-ticket">
-                                        <div><span class="text-muted">Билетов: </span>
-                                            4
-                                        </div>
-                                        <div><span class="text-muted">Детских: </span>
-                                            2
-                                        </div>
-                                    </div>
-                                    <div class="order-card-hall">
-                                        <div><span class="text-muted">Зал: </span>
-                                            Зал №1
-                                        </div>
-                                    </div>
-                                    <div class="order-card-date">
-                                        <div><span class="text-muted">Дата: </span>
-                                            10.06.2023
-                                        </div>
-                                        <div><span class="text-muted">Начало в: </span>
-                                            21:30
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="order-tickets">
-                                    <div class="order-ticket-card">
-                                        <div class="ticket-code">
-                                            <span class="text-muted">Билет: </span>12
-                                        </div>
-                                        <div class="ticket-seat">
-                                            <div><span class="text-muted">Ряд: </span>1</div>
-                                            <div><span class="text-muted">Место: </span>4</div>
-                                        </div>
-                                        <div class="ticket-seat-type">
-                                            <span class="text-muted">Тип: </span>Эконом
-                                        </div>
-                                    </div>
-                                    <div class="order-ticket-card">
-                                        <div class="ticket-code">
-                                            <span class="text-muted">Билет: </span>13
-                                        </div>
-                                        <div class="ticket-seat">
-                                            <div><span class="text-muted">Ряд: </span>1</div>
-                                            <div><span class="text-muted">Место: </span>5</div>
-                                        </div>
-                                        <div class="ticket-seat-type">
-                                            <span class="text-muted">Тип: </span>Эконом
-                                        </div>
-                                    </div>
-                                    <div class="order-ticket-card">
-                                        <div class="ticket-code">
-                                            <span class="text-muted">Билет: </span>14
-                                        </div>
-                                        <div class="ticket-seat">
-                                            <div><span class="text-muted">Ряд: </span>1</div>
-                                            <div><span class="text-muted">Место: </span>6</div>
-                                        </div>
-                                        <div class="ticket-seat-type">
-                                            <span class="text-muted">Тип: </span>Эконом
-                                        </div>
-                                    </div>
-                                    <div class="order-ticket-card">
-                                        <div class="ticket-code">
-                                            <span class="text-muted">Билет: </span>15
-                                        </div>
-                                        <div class="ticket-seat">
-                                            <div><span class="text-muted">Ряд: </span>1</div>
-                                            <div><span class="text-muted">Место: </span>7</div>
-                                        </div>
-                                        <div class="ticket-seat-type">
-                                            <span class="text-muted">Тип: </span>Эконом
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <ActiveCard v-for="order in orders.active" v-bind:key="order.id" v-bind:order="order"/>
                         </div>
                         <h2 class="section-title">Прошлые заказы</h2>
                         <div class="previous-orders">
-                            <div class="order-contents">
-                                <div class="order-card">
-                                    <div class="order-card-film">
-                                        <div class="order-card-film-img"><img src="@/assets/images/4.jpg" alt="film name"
-                                                                              class="img-cover"></div>
-                                        <div class="order-card-film-info">
-                                            <h2 class="order-card-film-title">Бессонница</h2>
-                                            <div class="order-card-film-genres text-muted">Драма, триллер</div>
-                                            <div class="order-card-film-restrictions text-muted">16+</div>
-                                        </div>
-                                    </div>
-                                    <div class="order-card-ticket">
-                                        <div><span class="text-muted">Билетов: </span>
-                                            4
-                                        </div>
-                                        <div><span class="text-muted">Детских: </span>
-                                            2
-                                        </div>
-                                    </div>
-                                    <div class="order-card-date">
-                                        <div><span class="text-muted">Дата: </span>
-                                            06.06.2023
-                                        </div>
-                                        <div><span class="text-muted">Начало в: </span>
-                                            16:30
-                                        </div>
-                                    </div>
-                                    <div class="order-card-rate">
-                                        <span class="text-rating">8/10</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="order-contents">
-                                <div class="order-card">
-                                    <div class="order-card-film">
-                                        <div class="order-card-film-img"><img src="@/assets/images/4.jpg" alt="film name"
-                                                                              class="img-cover"></div>
-                                        <div class="order-card-film-info">
-                                            <h2 class="order-card-film-title">Бессонница</h2>
-                                            <div class="order-card-film-genres text-muted">Драма, триллер</div>
-                                            <div class="order-card-film-restrictions text-muted">16+</div>
-                                        </div>
-                                    </div>
-                                    <div class="order-card-ticket">
-                                        <div><span class="text-muted">Билетов: </span>
-                                            4
-                                        </div>
-                                        <div><span class="text-muted">Детских: </span>
-                                            2
-                                        </div>
-                                    </div>
-                                    <div class="order-card-date">
-                                        <div><span class="text-muted">Дата: </span>
-                                            06.06.2023
-                                        </div>
-                                        <div><span class="text-muted">Начало в: </span>
-                                            16:30
-                                        </div>
-                                    </div>
-                                    <div class="order-card-rate">
-                                        <button class="btn btn-primary">Оценить</button>
-                                    </div>
-                                </div>
-                            </div>
+                            <PreviousCard v-for="order in orders.previous" v-bind:key="order.id" v-bind:order="order"/>
                         </div>
                     </div>
                 </div>
@@ -275,8 +44,22 @@
 
 <script setup>
 import store from "@/store";
+import {ref} from "vue";
+import request from "@/http";
+import ActiveCard from "@/components/orders/ActiveCard.vue";
+import PreviousCard from "@/components/orders/PreviousCard.vue";
 
-const user = store.state.user
+const user = store.state.user;
+const orders = ref([]);
+
+const token = localStorage.getItem("token");
+await request(token).get("/orders")
+	.then(data => {
+		orders.value = data;
+	})
+	.catch(e => {
+		store.mutations.showAlert(e.message);
+	});
 </script>
 
 <style scoped>
