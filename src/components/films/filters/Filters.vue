@@ -43,7 +43,6 @@
                     <input type="search" class="form-input" name="search" id="search"
                            v-model="filter.search"
                            placeholder="Название фильма">
-                    <button type="button" class="btn btn-primary">Поиск</button>
                 </div>
             </div>
         </div>

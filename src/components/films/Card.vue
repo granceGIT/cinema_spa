@@ -1,7 +1,8 @@
 <template>
     <router-link :to="{name:'movie',params:{id:props.film.id}}" class="showing-card">
         <div class="showing-card-img">
-            <img :src="props.film.images[0].image" alt="Под водой постер" class="img-cover">
+            <img v-if="props.film.images.length" :src="props.film.images[0].image" alt="Под водой постер" class="img-cover">
+            <img v-else src="@/assets/images/no-image.jpg" alt="изображение отсутствует" class="img-cover">
         </div>
         <h3 class="showing-card-title">
             {{ props.film.name }}

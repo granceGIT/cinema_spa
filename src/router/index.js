@@ -70,8 +70,7 @@ router.beforeEach(async (to, from, next) => {
 					return data;
 				})
 				.catch(() => {
-					// store.mutations.showAlert(e.message)
-					// localStorage.removeItem('token')
+					localStorage.removeItem('token')
 					return {};
 				}));
 	}

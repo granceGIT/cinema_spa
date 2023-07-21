@@ -38,6 +38,10 @@ body {
     color: var(--clr-text);
 }
 
+body.scroll-lock{
+    overflow: hidden;
+}
+
 .content {
     display: grid;
     min-height: 100vh;
@@ -243,7 +247,7 @@ body {
     list-style: none;
 }
 
-.header-menu .nav-link {
+.header-menu .nav-link{
     text-decoration: none;
     color: var(--clr-text);
     margin: 10px 0;
@@ -252,7 +256,7 @@ body {
     border-radius: 1rem;
 }
 
-.header-menu .nav-link:hover {
+.header-menu .nav-link:hover{
     background-color: var(--clr-grey);
 }
 
@@ -481,6 +485,16 @@ body {
     align-items: center;
 }
 
+.footer .nav-link{
+    text-decoration: none;
+    color: var(--clr-text);
+    transition: all .4s;
+}
+
+.footer .nav-link:hover{
+    color: var(--clr-primary);
+}
+
 /* #endregion */
 
 /* #region auth */
@@ -576,10 +590,6 @@ body {
 .filter-block .search-block {
     display: flex;
     gap: 20px;
-}
-
-.filter-block .search-block input {
-    max-width: 800px;
 }
 
 .filter-list .custom-check:checked~.filter-check-card {
@@ -864,6 +874,7 @@ body {
 
 .summary .checkout-btn {
     margin-right: auto;
+    margin-top: 30px;
 }
 
 .ticket-types input {
@@ -967,7 +978,7 @@ body {
 .order-card-ticket,
 .order-card-hall,
 .order-card-date{
-    font-size: 1.4em;
+    font-size: 1.2em;
 }
 
 .order-card-ticket,
@@ -976,6 +987,7 @@ body {
     flex-direction: column;
     gap: 15px;
 }
+
 
 
 .order-card-film-title{

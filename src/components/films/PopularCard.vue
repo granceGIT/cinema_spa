@@ -1,8 +1,9 @@
 <template>
     <router-link :to="'/films/'+props.film.id" class="popular-card">
         <div class="popular-card-img">
-            <img :src="props.film.images.length && props.film.images[0].image" :alt="props.film.name + 'постер'"
+            <img v-if="props.film.images.length" :src="props.film.images[0].image" :alt="props.film.name + 'постер'"
                  class="img-cover">
+            <img v-else src="@/assets/images/no-image.jpg" alt="изображение отсутствует" class="img-cover">
         </div>
         <h3 class="popular-card-title">
             {{ props.film.name }}

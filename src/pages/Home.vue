@@ -64,7 +64,8 @@
             <h2 class="section-title">Залы</h2>
             <div class="halls-body">
                 <div v-for="hall in halls" :key="hall.id" class="hall-card">
-                    <img :src="hall.images[0].image" :alt="'изображение ' + hall.name" class="img-cover">
+                    <img v-if="hall.images.length" :src="hall.images[0].image" :alt="'изображение ' + hall.name" class="img-cover">
+                    <img v-else src="@/assets/images/no-image.jpg" alt="изображение отсутствует" class="img-cover">
                     <h3 class="hall-card-title">{{ hall.name }}</h3>
                 </div>
             </div>

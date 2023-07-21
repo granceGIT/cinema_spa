@@ -2,7 +2,7 @@
     <main class="main">
         <section class="auth ">
             <div class="container">
-                <form action="/profile" class="auth-form">
+                <form class="auth-form">
                     <h2 class="form-title">
                         Авторизация
                     </h2>
@@ -20,7 +20,7 @@
                     </div>
 
                     <div class="form-group">
-                        <button class="btn btn-primary" @click="loginRequest">Войти</button>
+                        <button class="btn btn-primary" type="button" @click="loginRequest">Войти</button>
                     </div>
                     <div class="form-group">
                         <p>Еще нет аккаунта?
@@ -38,6 +38,7 @@ import request from "@/http";
 import {ref} from "vue";
 import router from "@/router";
 import store from "@/store";
+import {parsePhoneNumber} from "libphonenumber-js";
 
 const phone_number = ref("");
 const password = ref("");
@@ -47,7 +48,10 @@ const loginRequest = (e) => {
 	e.preventDefault();
 	errors.value = {};
 	store.mutations.hideAlert();
-	request().post("/login", {phone_number: phone_number.value, password: password.value})
+	request().post("/login", {
+		phone_number: parsePhoneNumber(phone_number.value, "RU").number,
+		password: password.value,
+	})
 		.then(data => {
 			phone_number.value = "";
 			password.value = "";

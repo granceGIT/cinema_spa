@@ -15,7 +15,7 @@
                     film.description
                     }}
                 </p>
-                <span class="film-price price">от 199</span>
+                <span class="film-price price">от {{ film.min_price }}</span>
                 <div class="film-manage">
                     <router-link :to="'/films/'+film.id" class="btn btn-primary">Подробнее</router-link>
                 </div>

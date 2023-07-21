@@ -1,34 +1,38 @@
 <template>
     <div class="seat-row">
-        <span class="row-number">Ряд {{ props.row.id}}</span>
-        <div class="seat-number economy">1</div>
-        <div class="seat-number economy">2</div>
-        <div class="seat-number economy">3</div>
-        <div class="seat-number economy">4</div>
-        <div class="seat-number economy">5</div>
-        <div class="seat-number economy">6</div>
-        <div class="seat-number economy">7</div>
-        <div class="seat-number economy">8</div>
-        <div class="seat-number economy">9</div>
-        <div class="seat-number economy">10</div>
-        <div class="seat-number economy disabled">11</div>
-        <div class="seat-number economy">12</div>
-        <div class="seat-number economy selected">13</div>
-        <div class="seat-number economy">14</div>
-        <div class="seat-number economy">15</div>
-        <div class="seat-number economy">16</div>
-        <div class="seat-number economy">17</div>
-        <div class="seat-number economy">18</div>
-        <span class="row-number">Ряд 1</span>
+        <span class="row-number">Ряд {{ props.row.row }}</span>
+        <div class="seat-number"
+             v-for="seat in props.row.seats"
+             :key="seat.id"
+             :class="{
+                 disabled:seat.is_occupied,
+                 economy:seat.type==='Эконом',
+                 selected:props.selected.length && props.selected.includes(seat.id)
+             }"
+             @click="selectSeat(seat)"
+        >{{ seat.number }}
+        </div>
+
+        <span class="row-number">Ряд {{ props.row.row }}</span>
     </div>
 </template>
 
 <script setup>
 import {defineProps} from "vue";
+import useEventBus from "@/composable/eventBus";
 
 const props = defineProps({
-    row:Object,
-})
+	row: Object,
+	selected: Array,
+});
+
+const {emit} = useEventBus();
+
+const selectSeat = (seat) => {
+	if (!seat.is_occupied) {
+		emit("showing-seats-selected", seat);
+	}
+};
 </script>
 
 <style lang="scss" scoped>

@@ -4,7 +4,9 @@
         <router-view v-slot="{ Component }">
             <Suspense timeout="0">
                 <template #default>
-                    <component :is="Component" :key="$route.path"/>
+                    <div>
+                        <component :is="Component" :key="$route.path"/>
+                    </div>
                 </template>
                 <template #fallback>
                     <LoadingSpinner/>

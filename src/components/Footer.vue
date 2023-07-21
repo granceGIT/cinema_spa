@@ -3,13 +3,13 @@
         <div class="container">
             <div class="footer-body">
                 <div class="footer-item">
-                    company name &copy;
+                    GitHub: granceGIT &copy;
                 </div>
                 <div class="footer-item">
-                    links
+                    <a href="https://github.com/granceGIT" class="nav-link">Мой GitHub</a>
                 </div>
                 <div class="footer-item">
-                    socials
+                    <a href="mailto:akopyan.ld@mail.ru" class="nav-link">Написать на почту</a>
                 </div>
             </div>
         </div>

@@ -2,8 +2,11 @@
     <div class="order-contents">
         <div class="order-card">
             <div class="order-card-film">
-                <div class="order-card-film-img"><img :src="props.order.showing.film.images[0].image" alt="film name"
-                                                      class="img-cover"></div>
+                <div class="order-card-film-img">
+                    <img v-if="props.order.showing.film.images.length" :src="props.order.showing.film.images[0].image"
+                         alt="film name" class="img-cover">
+                    <img v-else src="@/assets/images/no-image.jpg" alt="изображение отсутствует" class="img-cover">
+                </div>
                 <div class="order-card-film-info">
                     <h2 class="order-card-film-title"><a :href="'/films/'+props.order.showing.film.id"
                                                          class="film-title-link">{{ props.order.showing.film.name }}</a>
@@ -20,9 +23,6 @@
             <div class="order-card-ticket">
                 <div><span class="text-muted">Билетов: </span>
                     {{ props.order.tickets_count }}
-                </div>
-                <div><span class="text-muted">Детских: </span>
-                    {{ props.order.tickets_children_count }}
                 </div>
             </div>
             <div class="order-card-hall">

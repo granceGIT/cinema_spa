@@ -8,8 +8,8 @@
                         <div class="image-block main">
                             <img :src="mainImage" :alt="film.name+' poster'" class="img-cover">
                         </div>
-                        <div class="movie-images-body">
-                            <ScrollSlider v-bind:slides="film.images" v-bind:slide-class="'image-block'"
+                        <div class="movie-images-body" v-if="film.images.length">
+                            <ScrollSlider :slides="film.images" :slide-class="'image-block'"
                                           @selected="changeImage"/>
                         </div>
 
@@ -46,7 +46,7 @@
 
                             <span class="film-price price" v-if="film.min_price">от {{ film.min_price }}</span>
                             <div class="film-manage" v-if="film.min_price">
-                                <button class="btn btn-primary" @click="loadShowings">Купить билет</button>
+                                <button class="btn btn-primary" @click="buyTicket">Купить билет</button>
                             </div>
                             <div v-else>
                                 <p class="text-muted showings-not-found">Отсутствует в прокате</p>
@@ -59,10 +59,28 @@
                     </div>
                 </div>
 
-                <div class="showing-manage">
-                    <ShowingSelect v-bind:showings="showings"/>
+                <div class="showing-manage" v-if="loadShowings">
+                    <Suspense>
+                        <template #default>
+                            <ShowingSelect :filmID="film.id" :selectedID="selectedShowing.id"/>
+                        </template>
+                        <template #fallback>
+                            <LoadingSpinner/>
+                        </template>
+                    </Suspense>
 
-                    <SeatSelect v-bind:seats="[]"/>
+                    <Suspense v-if="Object.keys(selectedShowing).length">
+                        <template #default>
+                            <SeatSelect :showing="selectedShowing" :selected="selectedSeats.map(seat=>seat.id)"
+                                        :key="selectedShowing.id"/>
+                        </template>
+                        <template #fallback>
+                            <LoadingSpinner/>
+                        </template>
+                    </Suspense>
+
+                    <Summary v-if="selectedSeats.length" :selectedSeats="selectedSeats"
+                             :selectedShowing="selectedShowing"/>
 
 
                 </div>
@@ -80,57 +98,49 @@ import request from "@/http";
 import store from "@/store";
 import ScrollSlider from "@/components/ScrollSlider.vue";
 import ShowingSelect from "@/components/films/showings/ShowingSelect.vue";
-import useEventBus from "@/composable/eventBus";
 import SeatSelect from "@/components/films/seats/SeatSelect.vue";
+import LoadingSpinner from "@/App.vue";
+import useEventBus from "@/composable/eventBus";
+import Summary from "@/components/orders/Summary.vue";
+import router from "@/router";
 
 const film = ref({});
 const mainImage = ref("");
-const showings = ref([]);
 const route = useRoute();
+const selectedShowing = ref({});
+const selectedSeats = ref([]);
 const {bus} = useEventBus();
+const loadShowings = ref(false);
 
 const changeImage = (value) => {
 	mainImage.value = value;
 };
 
-const loadShowings = async () => {
-	await request().get(`/films/${film.value.id}/showings`)
-		.then(data => {
-			showings.value = formatDates(data);
-		})
-		.catch(e => {
-			store.mutations.showAlert(e.message);
-		});
+const buyTicket = () => {
+	if (!store.getters.isAuth()) {
+		router.push("/login");
+	} else {
+		loadShowings.value = true;
+	}
 };
 
-const formatDates = (dates) => {
-	const res = [];
-	dates.forEach(showing => {
-		const index = res.findIndex(item => item.date === showing.date);
 
-		if (index !== -1) {
-			res[index].times.push({id: showing.id, time: showing.start_time, price: showing.base_price});
-		} else {
-			res.push({
-				date: showing.date,
-				times: [
-					{
-						id: showing.id,
-						time: showing.start_time,
-						price: showing.base_price,
-					},
-				],
-			});
-		}
-	});
-	return res;
-};
-
-watch(() => bus.value.get("showing-time-selected"), value => {
-	const [id] = value ?? [];
-	console.log(id);
+// watching on value from event bus: when its changed we must load corresponding data
+watch(() => bus.value.get("showing-time-selected"), ([showing]) => {
+	selectedSeats.value = [];
+	selectedShowing.value = showing;
 });
 
+watch(() => bus.value.get("showing-seats-selected"), ([seat]) => {
+	const index = selectedSeats.value.findIndex(item => item.id === seat.id);
+	if (index === -1) {
+		selectedSeats.value.push(seat);
+	} else {
+		selectedSeats.value.splice(index, 1);
+	}
+});
+
+// Fetching movie data from remote api
 await request().get(`/films/${route.params.id}`)
 	.then(data => {
 		film.value = data;
