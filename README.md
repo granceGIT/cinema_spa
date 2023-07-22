@@ -1,7 +1,7 @@
 ## Информация
-vue3.js SPA Кинотеатра работающего с удаленным API.\
-API для проекта доступен по ссылке: https://github.com/granceGIT/cinema-api\
-Проект не закончен.
+vue3.js SPA Кинотеатра работающего с удаленным API.  
+API для проекта доступен по ссылке: https://github.com/granceGIT/cinema-api  
+Проект не закончен.  
 
 ## Установка
 Для того чтобы запустить проект необходимо скачать его на локальный диск и перейти к расположению
@@ -19,13 +19,13 @@ npm install
 ```
 npm run serve
 ```
-Для корректной работы необходим доступ к API\
-API можно скачать здесь: https://github.com/granceGIT/cinema-api
+Для корректной работы необходим доступ к API  
+API можно скачать здесь: https://github.com/granceGIT/cinema-api  
 
 ## Information
-vue3.js cinema spa\
-Project is currently beeing developed\
-This project using cinema API which is available here: https://github.com/granceGIT/cinema-api
+vue3.js cinema spa  
+Project is currently beeing developed  
+This project using cinema API which is available here: https://github.com/granceGIT/cinema-api  
 
 ## Installation
 First you need to clone project to local machine and go to location folder
