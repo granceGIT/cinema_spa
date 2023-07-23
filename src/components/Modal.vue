@@ -1,12 +1,14 @@
 <template>
-    <div class="modal" v-if="props.visible">
-        <div class="modal-wrapper" @click="closeModal">
-            <div class="modal-content" @click.stop>
-                <button class="modal-close-btn" type="button" role="button" @click="closeModal">&times;</button>
-                <slot/>
+    <Transition name="modal">
+        <div class="modal" v-if="props.visible">
+            <div class="modal-wrapper" @click="closeModal">
+                <div class="modal-content" @click.stop>
+                    <button class="modal-close-btn" type="button" role="button" @click="closeModal">&times;</button>
+                    <slot/>
+                </div>
             </div>
         </div>
-    </div>
+    </Transition>
 </template>
 
 <script setup>
@@ -72,5 +74,20 @@ const closeModal = () => {
 
 .modal-close-btn:hover {
     color: var(--clr-primary);
+}
+
+/* modal animations */
+.modal-enter-active,
+.modal-leave-active{
+    transition:all .25s;
+}
+
+.modal-enter-from,
+.modal-leave-to{
+    opacity: 0;
+}
+
+.modal-enter-to{
+    opacity: 1;
 }
 </style>

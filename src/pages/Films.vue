@@ -26,7 +26,7 @@
                 </h2>
                 <div class="showings-body">
                     <FilmsList v-if="films.length" v-bind:films="films"/>
-                    <p v-else class="showings-not-found">Ничего не найдено</p>
+                    <NotFoundRowsText :class="'showings-not-found'" v-else>Ничего не найдено</NotFoundRowsText>
                 </div>
             </div>
         </section>
@@ -40,6 +40,7 @@ import Filters from "@/components/films/filters/Filters.vue";
 import {ref} from "vue";
 import request from "@/http";
 import store from "@/store";
+import NotFoundRowsText from "@/components/NotFoundRowsText.vue";
 
 const films = ref([]);
 

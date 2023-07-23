@@ -40,6 +40,7 @@ body {
 
 body.scroll-lock{
     overflow: hidden;
+    padding-right: 14px;
 }
 
 .content {
@@ -159,7 +160,6 @@ body.scroll-lock{
     display: flex;
     flex-direction: column;
     margin: 15px 0;
-    gap: 10px;
 }
 
 .form-group.is-invalid input{
@@ -167,8 +167,9 @@ body.scroll-lock{
 }
 
 .form-group .invalid-text{
+    margin-top: 1em;
     color: #a62c2c;
-    font-size: .9em;
+    font-size: .85em;
     text-align: center;
 }
 
@@ -180,6 +181,7 @@ body.scroll-lock{
     border: 1px solid var(--clr-grey);
     border-radius: 5px;
     width: 100%;
+    margin-top: .5em;
 }
 
 .form-title {
@@ -188,15 +190,13 @@ body.scroll-lock{
     margin-bottom: 40px;
 }
 
-.form-group-line {
-    display: flex;
-    gap: 10px;
-    margin: 15px 0;
+.form-group.line{
+    display: block;
     align-items: center;
-    font-size: 1.1em;
 }
 
-.form-group-line input[type="checkbox"] {
+.form-group.line input[type="checkbox"] {
+    margin-right: 10px;
     width: 15px;
     height: 15px;
     accent-color: var(--clr-text);
@@ -318,7 +318,8 @@ body.scroll-lock{
     margin: 30px 0;
 }
 
-.film-info .showings-not-found{
+.film-info .showings-not-found,
+.rows-not-found-text{
     text-align: center;
     font-size: 1.2em;
 }
@@ -348,7 +349,7 @@ body.scroll-lock{
 .popular-card-img {
     border-radius: 5px;
     overflow: hidden;
-    min-height: 300px;
+    max-height: 300px;
 }
 
 .popular-card-title {
@@ -919,8 +920,7 @@ body.scroll-lock{
 
 /* #region orders */
 
-.active-orders,
-.previous-orders{
+.orders-body>div{
     margin: 50px 0 90px;
 }
 

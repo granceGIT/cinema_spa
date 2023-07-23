@@ -1,5 +1,9 @@
 <template>
-    <PopularCard v-for="film in films" v-bind:key="film.id" :film="film"/>
+    <div class="popular-body" v-if="films.length">
+        <PopularCard v-for="film in films" :key="film.id" :film="film"/>
+    </div>
+    <NotFoundRowsText v-else>Ничего не найдено</NotFoundRowsText>
+
 </template>
 
 <script setup>
@@ -8,6 +12,7 @@ import {ref} from "vue";
 import request from "@/http";
 import store from "@/store";
 import PopularCard from "@/components/films/PopularCard.vue";
+import NotFoundRowsText from "@/components/NotFoundRowsText.vue";
 
 const films = ref([]);
 

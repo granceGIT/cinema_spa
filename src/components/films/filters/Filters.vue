@@ -73,11 +73,11 @@ const filtersToQuery = (filterName, filters) => {
 };
 
 const updateDateFilters = () => {
-	filter.dates = [...document.querySelectorAll("input[name=\"date\"]:checked")].map(check => check.value);
+	filter.dates = [...document.querySelectorAll("input[name='date']:checked")].map(check => check.value);
 };
 
 const updateGenreFilters = () => {
-	filter.genres = [...document.querySelectorAll("input[name=\"genre\"]:checked")].map(check => check.value);
+	filter.genres = [...document.querySelectorAll("input[name='genre']:checked")].map(check => check.value);
 };
 
 watch(filter, async () => {

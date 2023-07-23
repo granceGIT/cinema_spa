@@ -24,14 +24,16 @@
                     </div>
                     <div class="orders-body">
                         <h2 class="section-title">Активные заказы</h2>
-                        <div class="active-orders">
+                        <div class="active-orders" v-if="orders.active.length">
                             <ActiveCard v-for="order in orders.active" :key="order.id" :order="order"/>
                         </div>
+                        <NotFoundRowsText v-else>Ничего не найдено</NotFoundRowsText>
                         <h2 class="section-title">Прошлые заказы</h2>
-                        <div class="previous-orders">
+                        <div class="previous-orders" v-if="orders.previous.length">
                             <PreviousCard v-for="order in orders.previous" :key="order.id" :order="order"
                                           @rate="rateFilm"/>
                         </div>
+                        <NotFoundRowsText v-else>Ничего не найдено</NotFoundRowsText>
                     </div>
                 </div>
             </div>
@@ -51,6 +53,7 @@ import ActiveCard from "@/components/orders/ActiveCard.vue";
 import PreviousCard from "@/components/orders/PreviousCard.vue";
 import Modal from "@/components/Modal.vue";
 import Rating from "@/components/Rating.vue";
+import NotFoundRowsText from "@/components/NotFoundRowsText.vue";
 
 const user = store.state.user;
 const orders = ref([]);

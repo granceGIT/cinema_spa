@@ -1,4 +1,4 @@
-const request = (token = false, baseUrl = "http://localhost:8000/api") => {
+const request = (token = false, baseUrl = process.env.VUE_APP_REMOTE_API_BASE_URL) => {
 	const headers = {
 		"Accept": "application/json",
 	};
