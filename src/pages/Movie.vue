@@ -6,7 +6,8 @@
 
                     <div class="movie-images">
                         <div class="image-block main">
-                            <img :src="mainImage" :alt="film.name+' poster'" class="img-cover">
+                            <img :src="mainImage.image" :alt="film.name+' poster'" class="img-cover"
+                                 @click="imageViewerVisible=true">
                         </div>
                         <div class="movie-images-body" v-if="film.images.length">
                             <ScrollSlider :slides="film.images" :slide-class="'image-block'"
@@ -22,7 +23,7 @@
                             <div class="film-details">
                                 <span class="film-rating" v-if="film.rating">{{ film.rating }}</span>
                                 <span class="film-created">{{ film.release_date }}, {{ film.country }}</span>
-                                <span class="film-geres">{{ film.genres.map(genre => genre.name).join(", ") }}</span>
+                                <span class="film-genres">{{ film.genres.map(genre => genre.name).join(", ") }}</span>
                                 <span class="film-duration">{{ film.duration }} мин</span>
                                 <span class="film-restrictions">{{ film.age_restriction }}+</span>
                             </div>
@@ -85,7 +86,7 @@
 
                 </div>
 
-
+                <ImageViewer :visible="imageViewerVisible" @close="imageViewerVisible=false" :currentImage="mainImage" @next="nextImage" @prev="prevImage"></ImageViewer>
             </div>
         </section>
     </main>
@@ -103,6 +104,7 @@ import LoadingSpinner from "@/App.vue";
 import useEventBus from "@/composable/eventBus";
 import Summary from "@/components/orders/Summary.vue";
 import router from "@/router";
+import ImageViewer from "@/components/ImageViewer.vue";
 
 const film = ref({});
 const mainImage = ref("");
@@ -111,10 +113,36 @@ const selectedShowing = ref({});
 const selectedSeats = ref([]);
 const {bus} = useEventBus();
 const loadShowings = ref(false);
+const imageViewerVisible = ref(false);
 
 const changeImage = (value) => {
 	mainImage.value = value;
 };
+
+const getCurrentImageIndex = ()=>{
+    return film.value.images.findIndex(image=>image.id===mainImage.value.id)
+};
+
+const nextImage = ()=>{
+    const index = getCurrentImageIndex();
+    if(index===film.value.images.length-1){
+        changeImage(film.value.images[0])
+    }
+    else{
+        changeImage(film.value.images[index+1])
+    }
+};
+
+const prevImage = ()=>{
+    const index = getCurrentImageIndex();
+    if(index===0){
+        changeImage(film.value.images[film.value.images.length-1])
+    }
+    else{
+        changeImage(film.value.images[index-1])
+    }
+};
+
 
 const buyTicket = () => {
 	if (!store.getters.isAuth()) {
@@ -144,7 +172,7 @@ watch(() => bus.value.get("showing-seats-selected"), ([seat]) => {
 await request().get(`/films/${route.params.id}`)
 	.then(data => {
 		film.value = data;
-		mainImage.value = data.images.length ? data.images[0].image : "";
+		mainImage.value = data.images.length ? data.images[0] : {};
 	})
 	.catch(e => {
 		store.mutations.showAlert(e.message);
@@ -153,5 +181,4 @@ await request().get(`/films/${route.params.id}`)
 </script>
 
 <style scoped>
-
 </style>

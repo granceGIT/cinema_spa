@@ -10,7 +10,7 @@
 import {defineProps, defineEmits} from "vue";
 
 const props = defineProps({
-	rates: Array || Number,
+	rates: Number,
 	selected: Number,
 });
 

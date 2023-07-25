@@ -62,6 +62,7 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
+	store.mutations.hideAlert();
 	const token = localStorage.getItem("token");
 	if (token) {
 		store.mutations.setUser(
@@ -70,7 +71,7 @@ router.beforeEach(async (to, from, next) => {
 					return data;
 				})
 				.catch(() => {
-					localStorage.removeItem('token')
+					localStorage.removeItem("token");
 					return {};
 				}));
 	}

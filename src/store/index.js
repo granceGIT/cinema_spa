@@ -9,8 +9,8 @@ const mutations = {
 	setUser(user) {
 		state.user = user;
 	},
-	showAlert(text = "Произошла ошибка", type = "error") {
-		state.alert = {text, type};
+	showAlert(text = "Произошла ошибка", type = "error", duration = 5000) {
+		state.alert = {text, type, duration};
 	},
 	hideAlert() {
 		state.alert = {};

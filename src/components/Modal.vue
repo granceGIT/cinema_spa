@@ -16,7 +16,6 @@ import {defineProps, defineEmits, watch} from "vue";
 
 const props = defineProps({
 	visible: Boolean,
-	film: Object,
 });
 
 watch(() => props.visible, () => {
@@ -30,6 +29,17 @@ const closeModal = () => {
 </script>
 
 <style scoped>
+.image-viewer .modal-content{
+    padding: 0;
+    max-width: 70%;
+    height: 70vh;
+    width: 100%;
+    min-height: 7em;
+}
+
+.image-viewer .modal-content img{
+    aspect-ratio: 16/9;
+}
 
 .modal-wrapper {
     position: fixed;

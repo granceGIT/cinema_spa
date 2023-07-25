@@ -1,8 +1,10 @@
 <template>
-    <div class="alert" :class="store.state.alert.type" v-if="store.getters.isAlert()">
-        {{ store.state.alert.text }}
-        <button class="btn-close" @click="hide">&times;</button>
-    </div>
+    <Transition name="alert">
+        <div class="alert" :class="store.state.alert.type" v-if="store.getters.isAlert()">
+            {{ store.state.alert.text }}
+            <button class="btn-close" @click="hide">&times;</button>
+        </div>
+    </Transition>
 </template>
 
 <script setup>
@@ -11,6 +13,7 @@ import store from "@/store";
 const hide = () => {
 	store.mutations.hideAlert();
 };
+
 </script>
 
 <style>
@@ -30,25 +33,6 @@ const hide = () => {
     align-items: center;
     color: #fff;
     font-size: 1.2em;
-    animation: opacity .4s both, slideInRight .4s both;
-}
-
-@keyframes opacity {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes slideInRight {
-    from {
-        transform: translateX(50%);
-    }
-    to {
-        transform: translateX(0);
-    }
 }
 
 .alert .btn-close {
@@ -70,5 +54,25 @@ const hide = () => {
 
 .alert.error {
     background-color: #b91919;
+}
+
+/* alert animations */
+.alert-enter-active,
+.alert-leave-active {
+    transition: opacity 1s, transform .5s;
+}
+
+.alert-enter-from,
+.alert-leave-to {
+    opacity: 0;
+}
+
+.alert-enter-from {
+    transform: translateX(20%);
+}
+
+.alert-enter-to {
+    opacity: 1;
+    transform: translateX(0%);
 }
 </style>

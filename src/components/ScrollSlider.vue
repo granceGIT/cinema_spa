@@ -2,7 +2,7 @@
     <div class="slider-wrapper">
         <div class="slider" ref="slider" @mousemove="dragging" @mousedown="dragStart" @mouseup="dragStop"
              @mouseout="dragStop">
-            <div v-for="slide in props.slides" v-bind:key="slide.id" ref="slides" class="slide" @click="imageSelected"
+            <div v-for="slide in props.slides" :key="slide.id" ref="slides" class="slide" @click="imageSelected(slide)"
                  :class="props.slideClass">
                 <img :src="slide.image" :alt="'image '+slide.id" class="img-cover">
             </div>
@@ -66,8 +66,8 @@ const nextSlide = () => {
 	slider.value.scrollLeft += slideWidth;
 };
 
-const imageSelected = (e) => {
-	emit("selected", e.target.querySelector("img").src);
+const imageSelected = (slide) => {
+	emit("selected", slide);
 };
 
 </script>
