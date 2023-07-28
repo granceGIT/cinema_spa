@@ -78,7 +78,7 @@ const updateFilmRate = async (rate) => {
 
 const loadOrders = async () => {
 	await request(token).get("/orders")
-		.then(data => {
+		.then(({data}) => {
 			orders.value = data;
 		})
 		.catch(e => {

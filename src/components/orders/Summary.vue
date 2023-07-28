@@ -35,7 +35,7 @@ const checkoutRequest = async () => {
 		}),
 		price: totalPrice.value,
 	})
-		.then(data => {
+		.then(({data}) => {
 			store.mutations.showAlert(`Заказ #${data.id} совершен!`, "alert");
 			router.push("/profile");
 		})

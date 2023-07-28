@@ -14,32 +14,50 @@ const routes = [
 		path: "/",
 		name: "home",
 		component: Home,
+		meta: {
+			title: "Кинотеатр",
+		},
 	},
 	{
 		path: "/login",
 		name: "login",
 		component: Login,
+		meta: {
+			title: "Авторизация",
+		},
 	},
 	{
 		path: "/register",
 		name: "register",
 		component: Register,
+		meta: {
+			title: "Регистрация",
+		},
 	},
 	{
 		path: "/films",
 		name: "showings",
 		component: Films,
+		meta: {
+			title: "Афиша",
+		},
 	},
 	{
 		path: "/films/:id",
 		name: "movie",
 		component: Movie,
+		meta: {
+			title: "Фильм",
+		},
 	},
 	{
 		path: "/profile",
 		name: "profile",
 		component: Profile,
-		meta: {requiresAuth: true},
+		meta: {
+			requiresAuth: true,
+			title: "Личный кабинет",
+		},
 	},
 	{
 		path: "/:pathMatch(.*)*",
@@ -67,19 +85,20 @@ router.beforeEach(async (to, from, next) => {
 	if (token) {
 		store.mutations.setUser(
 			await request(token).get("/profile")
-				.then(data => {
-					return data;
-				})
+				.then(({data}) => data)
 				.catch(() => {
 					localStorage.removeItem("token");
 					return {};
 				}));
 	}
 
-
 	if (to.meta.requiresAuth && !store.getters.isAuth()) {
 		next({name: "login"});
 	} else next();
+});
+
+router.afterEach((to) => {
+	document.title = to.meta.title || "Кинотеатр";
 });
 
 export default router;

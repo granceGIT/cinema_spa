@@ -10,7 +10,7 @@ const request = (token = false, baseUrl = process.env.VUE_APP_REMOTE_API_BASE_UR
 	const get = async (url) => {
 		const resp = await fetch(baseUrl + url, {headers});
 		const json = await resp.json();
-		return resp.ok ? Promise.resolve(json.data) : Promise.reject(json.error);
+		return resp.ok ? Promise.resolve(json) : Promise.reject(json.error);
 	};
 
 	const post = async (url, data, method = "POST") => {
@@ -23,7 +23,7 @@ const request = (token = false, baseUrl = process.env.VUE_APP_REMOTE_API_BASE_UR
 			body: JSON.stringify(data),
 		});
 		const json = await resp.json();
-		return resp.ok ? Promise.resolve(json.data) : Promise.reject(json.error);
+		return resp.ok ? Promise.resolve(json) : Promise.reject(json.error);
 	};
 
 	return {

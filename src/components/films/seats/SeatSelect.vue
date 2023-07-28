@@ -56,7 +56,7 @@ const formatSeats = (seats) => {
 };
 
 await request().get(`/showings/${props.showing.id}/seats`)
-	.then(data => {
+	.then(({data}) => {
 		seats.value = formatSeats(data.seats);
 		seatInfo.value = data.seat_info;
 	})

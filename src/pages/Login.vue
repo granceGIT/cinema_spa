@@ -53,7 +53,7 @@ const loginRequest = (e) => {
 			phone_number: parsePhoneNumber(phone_number.value, "RU").number,
 			password: password.value,
 		})
-			.then(data => {
+			.then(({data}) => {
 				phone_number.value = "";
 				password.value = "";
 				localStorage.setItem("token", data.token);

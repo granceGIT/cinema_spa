@@ -1,22 +1,25 @@
 <template>
     <Modal :visible="props.visible" @close="closeImageViewer" :class="'image-viewer'">
-        <div class="control-prev" @click="prevImage">PREV</div>
-        <img :src="props.currentImage.image" :alt="props.currentImage" class="img-cover">
-        <div class="control-next" @click="nextImage">NEXT</div>
+        <div class="control-prev" @click="prevImage">Пред</div>
+        <img :src="currentImage.image" :alt="'image ' + currentImage.id" class="img-cover">
+        <div class="control-next" @click="nextImage">След</div>
     </Modal>
 </template>
 
 <script setup>
 import Modal from "@/components/Modal.vue";
-import {defineProps,defineEmits} from "vue";
+import {defineProps, defineEmits, ref} from "vue";
 
 const props = defineProps({
 	visible: {
 		type: Boolean,
 		default: false,
 	},
-	currentImage: Object,
+	images: Array,
+	selectedImage: Object,
 });
+
+const currentImage = ref(props.selectedImage)
 
 const emit = defineEmits(["close"]);
 
@@ -24,16 +27,34 @@ const closeImageViewer = () => {
 	emit("close");
 };
 
+const getCurrentImageIndex = () => {
+	return props.images.findIndex(image => image.id === currentImage.value.id);
+};
+
 const nextImage = () => {
-	emit("next");
+	const index = getCurrentImageIndex();
+	if (index === props.images.length - 1) {
+		currentImage.value = props.images[0];
+	} else {
+      currentImage.value = props.images[index + 1];
+	}
 };
 
 const prevImage = () => {
-	emit("prev");
+	const index = getCurrentImageIndex();
+	if (index === 0) {
+      currentImage.value = props.images[props.images.length - 1];
+	} else {
+      currentImage.value = props.images[index - 1];
+	}
 };
 </script>
 
 <style scoped>
+.image-viewer img {
+    aspect-ratio: 16/9;
+}
+
 .control-prev,
 .control-next {
     position: absolute;

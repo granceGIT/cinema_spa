@@ -13,6 +13,7 @@ import {defineProps, ref} from "vue";
 import Card from "@/components/films/showings/Card.vue";
 import request from "@/http";
 import store from "@/store";
+
 const props = defineProps({
 	filmID: Number,
 	selectedID: Number,
@@ -42,13 +43,17 @@ const formatDates = (dates) => {
 	return res;
 };
 
-await request().get(`/films/${props.filmID}/showings`)
-	.then(data => {
-		showings.value = formatDates(data);
-	})
-	.catch(e => {
-		store.mutations.showAlert(e.message);
-	});
+const loadShowings = async () => {
+	await request().get(`/films/${props.filmID}/showings`)
+		.then(({data}) => {
+			showings.value = formatDates(data);
+		})
+		.catch(e => {
+			store.mutations.showAlert(e.message);
+		});
+};
+
+await loadShowings();
 
 
 </script>

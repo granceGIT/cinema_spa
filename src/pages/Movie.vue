@@ -3,18 +3,15 @@
         <section class="movie section">
             <div class="container">
                 <div class="movie-body">
-
                     <div class="movie-images">
                         <div class="image-block main">
                             <img :src="mainImage.image" :alt="film.name+' poster'" class="img-cover"
-                                 @click="imageViewerVisible=true">
+                                 @click="imageViewerVisible = true">
                         </div>
                         <div class="movie-images-body" v-if="film.images.length">
                             <ScrollSlider :slides="film.images" :slide-class="'image-block'"
                                           @selected="changeImage"/>
                         </div>
-
-
                     </div>
 
                     <div class="movie-info">
@@ -55,15 +52,14 @@
 
 
                         </div>
-
-
                     </div>
                 </div>
 
                 <div class="showing-manage" v-if="loadShowings">
                     <Suspense>
                         <template #default>
-                            <ShowingSelect :filmID="film.id" :selectedID="selectedShowing.id"/>
+                            <ShowingSelect :filmID="film.id"
+                                           :selectedID="selectedShowing.id"/>
                         </template>
                         <template #fallback>
                             <LoadingSpinner/>
@@ -72,7 +68,8 @@
 
                     <Suspense v-if="Object.keys(selectedShowing).length">
                         <template #default>
-                            <SeatSelect :showing="selectedShowing" :selected="selectedSeats.map(seat=>seat.id)"
+                            <SeatSelect :showing="selectedShowing"
+                                        :selected="selectedSeats.map(seat=>seat.id)"
                                         :key="selectedShowing.id"/>
                         </template>
                         <template #fallback>
@@ -80,13 +77,16 @@
                         </template>
                     </Suspense>
 
-                    <Summary v-if="selectedSeats.length" :selectedSeats="selectedSeats"
+                    <Summary v-if="selectedSeats.length"
+                             :selectedSeats="selectedSeats"
                              :selectedShowing="selectedShowing"/>
-
-
                 </div>
 
-                <ImageViewer :visible="imageViewerVisible" @close="imageViewerVisible=false" :currentImage="mainImage" @next="nextImage" @prev="prevImage"></ImageViewer>
+                <ImageViewer :visible="imageViewerVisible"
+                             @close="imageViewerVisible=false"
+                             :selected-image="mainImage"
+                             :key="mainImage"
+                             :images="film.images"/>
             </div>
         </section>
     </main>
@@ -100,7 +100,7 @@ import store from "@/store";
 import ScrollSlider from "@/components/ScrollSlider.vue";
 import ShowingSelect from "@/components/films/showings/ShowingSelect.vue";
 import SeatSelect from "@/components/films/seats/SeatSelect.vue";
-import LoadingSpinner from "@/App.vue";
+import LoadingSpinner from "@/components/LoadingSpinner.vue";
 import useEventBus from "@/composable/eventBus";
 import Summary from "@/components/orders/Summary.vue";
 import router from "@/router";
@@ -118,31 +118,6 @@ const imageViewerVisible = ref(false);
 const changeImage = (value) => {
 	mainImage.value = value;
 };
-
-const getCurrentImageIndex = ()=>{
-    return film.value.images.findIndex(image=>image.id===mainImage.value.id)
-};
-
-const nextImage = ()=>{
-    const index = getCurrentImageIndex();
-    if(index===film.value.images.length-1){
-        changeImage(film.value.images[0])
-    }
-    else{
-        changeImage(film.value.images[index+1])
-    }
-};
-
-const prevImage = ()=>{
-    const index = getCurrentImageIndex();
-    if(index===0){
-        changeImage(film.value.images[film.value.images.length-1])
-    }
-    else{
-        changeImage(film.value.images[index-1])
-    }
-};
-
 
 const buyTicket = () => {
 	if (!store.getters.isAuth()) {
@@ -169,14 +144,19 @@ watch(() => bus.value.get("showing-seats-selected"), ([seat]) => {
 });
 
 // Fetching movie data from remote api
-await request().get(`/films/${route.params.id}`)
-	.then(data => {
-		film.value = data;
-		mainImage.value = data.images.length ? data.images[0] : {};
-	})
-	.catch(e => {
-		store.mutations.showAlert(e.message);
-	});
+const loadMovie = async () => {
+	await request().get(`/films/${route.params.id}`)
+		.then(({data}) => {
+			film.value = data;
+			document.title = data.name;
+			mainImage.value = data.images.length ? data.images[0] : {};
+		})
+		.catch(e => {
+			store.mutations.showAlert(e.message);
+		});
+};
+
+await loadMovie();
 
 </script>
 

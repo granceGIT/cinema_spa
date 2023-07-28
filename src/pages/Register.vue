@@ -69,7 +69,7 @@ const registerRequest = (e) => {
 			password: password.value,
 			agreement: agreement.value,
 		})
-			.then(data => {
+			.then(({data}) => {
 				phone_number.value = "";
 				password.value = "";
 				localStorage.setItem("token", data.token);

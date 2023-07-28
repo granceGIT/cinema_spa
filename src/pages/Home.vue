@@ -24,74 +24,40 @@
         </div>
     </section>
 
-    <section class="popular section">
-        <div class="container">
-            <h2 class="section-title">
-                Популярные за неделю
-            </h2>
+    <Suspense>
+        <template #default>
+            <PopularList/>
+        </template>
+        <template #fallback>
+            <LoadingSpinner/>
+        </template>
+    </Suspense>
 
-            <Suspense>
-                <template #default>
-                    <PopularList/>
-                </template>
-                <template #fallback>
-                    <LoadingSpinner/>
-                </template>
-            </Suspense>
+    <Suspense>
+        <template #default>
+            <Latest/>
+        </template>
+        <template #fallback>
+            <LoadingSpinner/>
+        </template>
+    </Suspense>
 
-        </div>
-    </section>
-
-    <section class="latest section">
-        <div class="container">
-            <h2 class="section-title">
-                Новинка
-            </h2>
-            <Suspense>
-                <template #default>
-                    <Latest/>
-                </template>
-                <template #fallback>
-                    <LoadingSpinner/>
-                </template>
-            </Suspense>
-        </div>
-    </section>
-
-    <section class="halls section">
-        <div class="container">
-            <h2 class="section-title">Залы</h2>
-            <div class="halls-body">
-                <div v-for="hall in halls" :key="hall.id" class="hall-card">
-                    <img v-if="hall.images.length" :src="hall.images[0].image" :alt="'изображение ' + hall.name"
-                         class="img-cover">
-                    <img v-else src="@/assets/images/no-image.jpg" alt="изображение отсутствует" class="img-cover">
-                    <h3 class="hall-card-title">{{ hall.name }}</h3>
-                </div>
-            </div>
-        </div>
-    </section>
+    <Suspense>
+        <template #default>
+            <HallList></HallList>
+        </template>
+        <template #fallback>
+            <LoadingSpinner/>
+        </template>
+    </Suspense>
 </template>
 
 <script setup>
-import {onMounted, ref} from "vue";
-import request from "@/http";
-import store from "@/store";
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
 import PopularList from "@/components/films/PopularList.vue";
 import Latest from "@/components/films/Latest.vue";
+import HallList from "@/components/halls/HallList.vue";
 
-const halls = ref([]);
-
-onMounted(() => {
-	request().get("/halls")
-		.then(data => {
-			halls.value = data;
-		})
-		.catch(error => {
-			store.mutations.showAlert(error);
-		});
-});
 </script>
 
 <style scoped>

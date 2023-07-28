@@ -37,10 +37,6 @@ const closeModal = () => {
     min-height: 7em;
 }
 
-.image-viewer .modal-content img{
-    aspect-ratio: 16/9;
-}
-
 .modal-wrapper {
     position: fixed;
     top: 0;
@@ -49,7 +45,7 @@ const closeModal = () => {
     left: 0;
     background: rgba(0, 0, 0, .4);
     cursor: pointer;
-    z-index: 0;
+    z-index: 1000;
 }
 
 .modal-content {
@@ -64,7 +60,7 @@ const closeModal = () => {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 1;
+    z-index: 1001;
     cursor: auto;
 }
 
@@ -90,6 +86,7 @@ const closeModal = () => {
 .modal-enter-active,
 .modal-leave-active{
     transition:all .25s;
+    z-index: 1000;
 }
 
 .modal-enter-from,
