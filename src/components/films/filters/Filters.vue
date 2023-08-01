@@ -1,40 +1,47 @@
 <template>
-    <form class="filters-form">
-        <div class="filters-body">
-            <div class="filter-block">
-                <h3 class="filter-block-title">Жанры: </h3>
-                <ul class="filter-list">
-                    <li v-for="genre in genres" v-bind:key="genre.id">
-                        <input type="checkbox" :value="genre.id" name="genre" @input="updateGenreFilters"
-                               :id="'genre'+genre.id"
-                               class="custom-check">
-                        <label :for="'genre'+genre.id" class="filter-check-card">{{ genre.name }}</label>
-                    </li>
-                </ul>
-            </div>
+    <section class="filters">
+        <div class="container">
+            <h2 class="section-title">
+                Фильтры
+            </h2>
+            <form class="filters-form">
+                <div class="filters-body">
+                    <div class="filter-block">
+                        <h3 class="filter-block-title">Жанры: </h3>
+                        <ul class="filter-list">
+                            <li v-for="genre in genres" v-bind:key="genre.id">
+                                <input type="checkbox" :value="genre.id" name="genre" @input="updateGenreFilters"
+                                       :id="'genre'+genre.id"
+                                       class="custom-check">
+                                <label :for="'genre'+genre.id" class="filter-check-card">{{ genre.name }}</label>
+                            </li>
+                        </ul>
+                    </div>
 
-            <div class="filter-block">
-                <h3 class="filter-block-title">Дата: </h3>
-                <ul class="filter-list">
-                    <li v-for="date in dates" :key="date.id">
-                        <input type="checkbox" :value="date.date" @input="updateDateFilters" name="date"
-                               :id="'date'+date.id" class="custom-check">
-                        <label :for="'date'+date.id" class="filter-check-card">{{ date.name }}</label>
-                    </li>
-                </ul>
-            </div>
+                    <div class="filter-block">
+                        <h3 class="filter-block-title">Дата: </h3>
+                        <ul class="filter-list">
+                            <li v-for="date in dates" :key="date.id">
+                                <input type="checkbox" :value="date.date" @input="updateDateFilters" name="date"
+                                       :id="'date'+date.id" class="custom-check">
+                                <label :for="'date'+date.id" class="filter-check-card">{{ date.name }}</label>
+                            </li>
+                        </ul>
+                    </div>
 
-            <div class="filter-block form-group">
-                <h3 class="filter-block-title"><label for="search">Поиск по названию</label>: </h3>
-                <div class="search-block">
-                    <input type="search" class="form-input" name="search" id="search"
-                           @input="updateSearch"
-                           placeholder="Название фильма">
+                    <div class="filter-block form-group">
+                        <h3 class="filter-block-title"><label for="search">Поиск по названию</label>: </h3>
+                        <div class="search-block">
+                            <input type="search" class="form-input" name="search" id="search"
+                                   @input="updateSearch"
+                                   placeholder="Название фильма">
+                        </div>
+                        <LoadingSpinner v-if="timeout"/>
+                    </div>
                 </div>
-                <LoadingSpinner v-if="timeout"/>
-            </div>
+            </form>
         </div>
-    </form>
+    </section>
 </template>
 
 <script setup>

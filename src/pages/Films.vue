@@ -1,23 +1,15 @@
 <template>
     <main class="main">
-        <section class="filters">
-            <div class="container">
-                <h2 class="section-title">
-                    Фильтры
-                </h2>
-                <div>
-                    <Suspense>
-                        <template #default>
-                            <Filters @updated="updateFilters"/>
-                        </template>
-                        <template #fallback>
-                            <LoadingSpinner/>
-                        </template>
-                    </Suspense>
-                </div>
-            </div>
-
-        </section>
+        <div>
+            <Suspense>
+                <template #default>
+                    <Filters @updated="updateFilters"/>
+                </template>
+                <template #fallback>
+                    <LoadingSpinner/>
+                </template>
+            </Suspense>
+        </div>
 
         <section class="showings section">
             <div class="container">
@@ -85,7 +77,7 @@ const loadFilms = async () => {
 
 await loadFilms();
 
-watch([page,filters], loadFilms);
+watch([page, filters], loadFilms);
 
 </script>
 

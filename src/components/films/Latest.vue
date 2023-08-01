@@ -1,5 +1,5 @@
 <template>
-    <section class="latest section">
+    <section class="latest section" v-if="Object.keys(film).length">
         <div class="container">
             <h2 class="section-title">
                 Новинка
